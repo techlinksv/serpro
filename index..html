@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Projects - Soluciones Tecnológicas Inteligentes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #0059FF;
+            --accent-green: #40F29A;
+            --dark-navy: #01004E;
+            --white: #ffffff;
+            --gray-light: #b4b4b4;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--dark-navy);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* Animated gradient background */
+        .gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-green) 50%, var(--primary-blue) 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            opacity: 0.05;
+            z-index: -1;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.98);
+            border-bottom: 1px solid rgba(0, 89, 255, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(0, 89, 255, 0.08);
+        }
+
+        nav.scrolled {
+            padding: 0.7rem 5%;
+            box-shadow: 0 5px 30px rgba(0, 89, 255, 0.15);
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .logo-container {
+            height: 50px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-container img {
+            height: 100%;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container:hover img {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--accent-green));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-green);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 5% 4rem;
+            position: relative;
+            background: linear-gradient(135deg, rgba(1, 0, 78, 0.8) 0%, rgba(0, 89, 255, 0.1) 100%);
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            text-align: center;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(0, 89, 255, 0.2);
+            border: 1px solid var(--primary-blue);
+            border-radius: 50px;
+            color: var(--accent-green);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-green), var(--primary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% auto;
+            animation: shine 4s linear infinite;
+        }
+
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            color: var(--gray-light);
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--gray-light);
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1.1rem 2.8rem;
+            font-size: 1.05rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-green));
+            color: var(--white);
+            box-shadow: 0 10px 30px rgba(0, 89, 255, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(64, 242, 154, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--primary-blue);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 89, 255, 0.1);
+            border-color: var(--accent-green);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 8rem 5%;
+            background: rgba(1, 0, 78, 0.5);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 5rem;
+        }
+
+        .section-title {
+            font-size: 3.2rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            color: var(--gray-light);
+            font-size: 1.3rem;
+            line-height: 1.6;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, rgba(0, 89, 255, 0.05), rgba(1, 0, 78, 0.8));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 89, 255, 0.3);
+            border-radius: 25px;
+            padding: 3rem;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(64, 242, 154, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-green);
+            box-shadow: 0 20px 60px rgba(0, 89, 255, 0.4);
+        }
+
+        .service-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            padding: 1.2rem;
+            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(0, 89, 255, 0.15), rgba(64, 242, 154, 0.15));
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            background: linear-gradient(135deg, rgba(0, 89, 255, 0.25), rgba(64, 242, 154, 0.25));
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .service-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        .service-card p {
+            color: var(--gray-light);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .service-features li {
+            padding: 0.5rem 0;
+            color: var(--gray-light);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .service-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+            font-weight: bold;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 8rem 5%;
+            background: linear-gradient(135deg, rgba(1, 0, 78, 0.9) 0%, rgba(0, 89, 255, 0.05) 100%);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: rgba(0, 89, 255, 0.05);
+            border: 2px solid rgba(0, 89, 255, 0.3);
+            border-radius: 30px;
+            padding: 3rem;
+            transition: all 0.4s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--accent-green);
+            box-shadow: 0 25px 70px rgba(64, 242, 154, 0.3);
+        }
+
+        .product-tag {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-green));
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .product-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+            font-weight: 800;
+        }
+
+        .product-card p {
+            color: var(--gray-light);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        /* About Section */
+        .about {
+            padding: 8rem 5%;
+            background: rgba(1, 0, 78, 0.6);
+        }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+        }
+
+        .about-text p {
+            color: var(--gray-light);
+            line-height: 1.8;
+            font-size: 1.15rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-highlights {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .highlight-item {
+            background: rgba(0, 89, 255, 0.1);
+            border: 1px solid rgba(0, 89, 255, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .highlight-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .highlight-item h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent-green);
+        }
+
+        .highlight-item p {
+            color: var(--gray-light);
+            font-size: 0.95rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 8rem 5%;
+            background: linear-gradient(135deg, rgba(0, 89, 255, 0.15), rgba(64, 242, 154, 0.15));
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 89, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 900;
+        }
+
+        .cta-section p {
+            font-size: 1.4rem;
+            color: var(--gray-light);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 5%;
+            background: rgba(1, 0, 78, 0.95);
+            border-top: 1px solid rgba(0, 89, 255, 0.3);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-brand p {
+            color: var(--gray-light);
+            line-height: 1.6;
+        }
+
+        .footer-section h4 {
+            color: var(--accent-green);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.7rem;
+        }
+
+        .footer-section a {
+            color: var(--gray-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-green);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray-light);
+        }
+
+        /* Floating particles */
+        .particle {
+            position: fixed;
+            width: 5px;
+            height: 5px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 12s infinite ease-in-out;
+            box-shadow: 0 0 15px rgba(64, 242, 154, 0.4);
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-60px) translateX(40px); }
+            50% { transform: translateY(-120px) translateX(-40px); }
+            75% { transform: translateY(-60px) translateX(30px); }
+        }
+
+        @media (max-width: 1024px) {
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .hero-stats {
+                gap: 2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .about-highlights {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="gradient-bg"></div>
+    
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="logo-container">
+            <img src="serpr2.png" alt="Service Projects">
+        </div>
+        <ul class="nav-links">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#productos">Productos</a></li>
+            <li><a href="#nosotros">Nosotros</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <div class="hero-badge">IMPULSADO POR INTELIGENCIA ARTIFICIAL</div>
+            <h1>Soluciones Tecnológicas Inteligentes</h1>
+            <p>Transformamos empresas con automatización de procesos, IA avanzada y desarrollo de software personalizado. Desde El Salvador para el mundo.</p>
+            <div class="cta-buttons">
+                <a href="#contacto" class="btn btn-primary">Comenzar Proyecto</a>
+                <a href="#servicios" class="btn btn-secondary">Explorar Servicios</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">10+</span>
+                    <span class="stat-label">Años de Experiencia</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">5+</span>
+                    <span class="stat-label">Años en IA & ML</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Metodologías Ágiles</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="servicios">
+        <div class="section-header">
+            <h2 class="section-title">Nuestros Servicios</h2>
+            <p class="section-subtitle">Soluciones integrales que combinan innovación, experiencia y tecnología de punta para transformar tu negocio</p>
+        </div>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">⚡</div>
+                <h3>Process Automation</h3>
+                <p>Automatizamos tareas repetitivas y procesos críticos, liberando recursos para actividades de mayor valor estratégico.</p>
+                <ul class="service-features">
+                    <li>Automatización de facturación y cobros</li>
+                    <li>Procesamiento masivo de datos</li>
+                    <li>Reportes gerenciales automáticos</li>
+                    <li>Reducción de errores operativos</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🚀</div>
+                <h3>Hyper Transformation</h3>
+                <p>Más que transformación digital: rediseñamos procesos desde su base aprovechando tecnologías emergentes.</p>
+                <ul class="service-features">
+                    <li>Integración de IA en procesos estratégicos</li>
+                    <li>Digitalización y centralización</li>
+                    <li>Modelos predictivos avanzados</li>
+                    <li>Arquitecturas cloud híbridas</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">📊</div>
+                <h3>Business Intelligence</h3>
+                <p>Transformamos datos en información útil y procesable para apoyar decisiones estratégicas con impacto real.</p>
+                <ul class="service-features">
+                    <li>Dashboards interactivos en tiempo real</li>
+                    <li>Analítica predictiva y prescriptiva</li>
+                    <li>Integración de múltiples fuentes</li>
+                    <li>Monitoreo continuo de KPIs</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">💻</div>
+                <h3>Software Development</h3>
+                <p>Diseñamos y desarrollamos aplicaciones a medida que integran tecnología de última generación con máxima seguridad.</p>
+                <ul class="service-features">
+                    <li>Aplicaciones web y móviles</li>
+                    <li>Arquitecturas de microservicios</li>
+                    <li>APIs e integraciones</li>
+                    <li>Soluciones cloud y on-premise</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💻</div>
+                <h3>Staff Augmentation</h3>
+                <p>Diseñamos las mejores tecnicas de reclutamiento, para que brindarte los equipo idoneos para completar los proyectos de su empresa.</p>
+                <ul class="service-features">
+                    <li>Ingeniero Java - Microservicios</li>
+                    <li>Ingeniero .NET - Microservicios</li>
+                    <li>Ingeniero QA Automation</li>
+                    <li>Perfiles en Ciberseguridad</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="productos">
+        <div class="section-header">
+            <h2 class="section-title">Productos Especializados</h2>
+            <p class="section-subtitle">Soluciones listas para implementar, diseñadas con IA y adaptadas a industrias específicas</p>
+        </div>
+        
+        <div class="products-grid">
+            <div class="product-card">
+                <span class="product-tag">SALUD & BELLEZA</span>
+                <h3>CRM Inteligente</h3>
+                <p>Plataforma completa para gestionar clientes, tratamientos y campañas de fidelización, optimizando la experiencia del usuario final.</p>
+                <ul class="service-features">
+                    <li>Gestión de fichas técnicas con historial clínico</li>
+                    <li>Biblioteca fotográfica para seguimiento</li>
+                    <li>Agenda con recordatorios automáticos</li>
+                    <li>Segmentación inteligente para marketing</li>
+                    <li>Integración WhatsApp y correo</li>
+                </ul>
+            </div>
+
+            <div class="product-card">
+                <span class="product-tag">EDUCACIÓN</span>
+                <h3>LMS Inteligente</h3>
+                <p>Sistema avanzado para la gestión y entrega de programas de formación, potenciado con IA para aprendizaje personalizado.</p>
+                <ul class="service-features">
+                    <li>Creación y gestión de cursos en línea</li>
+                    <li>Seguimiento con analítica avanzada</li>
+                    <li>Evaluaciones con retroalimentación automática</li>
+                    <li>Certificaciones digitales</li>
+                    <li>Aprendizaje adaptativo</li>
+                </ul>
+            </div>
+
+            <div class="product-card">
+                <span class="product-tag">ATENCIÓN AL CLIENTE</span>
+                <h3>Asistentes Virtuales</h3>
+                <p>Plataforma para crear, entrenar y gestionar chatbots y asistentes virtuales inteligentes en múltiples canales.</p>
+                <ul class="service-features">
+                    <li>Integración multicanal (WhatsApp, Web, Messenger)</li>
+                    <li>Entrenamiento con bases de conocimiento</li>
+                    <li>Flujos conversacionales personalizables</li>
+                    <li>Análisis de métricas en tiempo real</li>
+                    <li>Atención 24/7 automatizada</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="nosotros">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>Quiénes Somos</h2>
+                <p>Somos una empresa salvadoreña dedicada a la creación de soluciones tecnológicas inteligentes que integran automatización de procesos, transformación digital avanzada y analítica de datos con Inteligencia Artificial como pilar central.</p>
+                <p>Nuestro fundador cuenta con más de 10 años de experiencia en desarrollo de software y más de 6 años trabajando en IA (ML, DL, LLM, NLP), lo que nos permite ofrecer soluciones sólidas, escalables y alineadas a las tendencias más avanzadas del mercado.</p>
+                <p>Trabajamos bajo metodologías ágiles, garantizando rapidez en la entrega, adaptabilidad y un enfoque constante en el valor que generamos para nuestros clientes.</p>
+            </div>
+            <div class="about-highlights">
+                <div class="highlight-item">
+                    <div class="highlight-icon">🎯</div>
+                    <h4>Misión</h4>
+                    <p>Empoderar empresas con IA para prosperar en la era digital mediante automatización y analítica avanzada</p>
+                </div>
+                <div class="highlight-item">
+                    <div class="highlight-icon">🌟</div>
+                    <h4>Visión</h4>
+                    <p>Ser la fuerza líder donde datos, tecnología e inteligencia convergen para un futuro más eficiente</p>
+                </div>
+                <div class="highlight-item">
+                    <div class="highlight-icon">⚙️</div>
+                    <h4>Metodología</h4>
+                    <p>Desarrollo ágil con entregas rápidas y adaptación continua a tus necesidades</p>
+                </div>
+                <div class="highlight-item">
+                    <div class="highlight-icon">🔒</div>
+                    <h4>Seguridad</h4>
+                    <p>Estándares internacionales de seguridad y protección de datos en todas nuestras soluciones</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contacto">
+        <div class="cta-content">
+            <h2>¿Listo para Transformar tu Empresa?</h2>
+            <p>Contáctanos hoy y descubre cómo podemos ayudarte a alcanzar tus objetivos con soluciones tecnológicas innovadoras impulsadas por IA.</p>
+            <div class="cta-buttons">
+                <a href="mailto:contacto@serviceprojects.com" class="btn btn-primary">Enviar Correo</a>
+                <a href="tel:+503" class="btn btn-secondary">Llamar Ahora</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>SERVICE PROJECTS</h3>
+                <p>Soluciones tecnológicas inteligentes con IA. Desde El Salvador para el mundo. Transformando empresas con innovación y experiencia.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Servicios</h4>
+                <ul>
+                    <li><a href="#servicios">Process Automation</a></li>
+                    <li><a href="#servicios">Hyper Transformation</a></li>
+                    <li><a href="#servicios">Business Intelligence</a></li>
+                    <li><a href="#servicios">Software Development</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Productos</h4>
+                <ul>
+                    <li><a href="#productos">CRM Inteligente</a></li>
+                    <li><a href="#productos">LMS Inteligente</a></li>
+                    <li><a href="#productos">Asistentes Virtuales</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Empresa</h4>
+                <ul>
+                    <li><a href="#nosotros">Quiénes Somos</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                    <li><a href="#servicios">Portafolio</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Service Projects. Todos los derechos reservados. | Soluciones Tecnológicas con IA desde El Salvador 🇸🇻</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Create floating particles
+        function createParticles() {
+            const particleCount = 25;
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 12 + 's';
+                particle.style.animationDuration = (Math.random() * 12 + 12) + 's';
+                document.body.appendChild(particle);
+            }
+        }
+
+        createParticles();
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-card, .product-card, .highlight-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Add parallax effect to hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero-content');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
